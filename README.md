@@ -78,7 +78,7 @@ The output from the latest session will be stored in `/server_log.txt`.
 
 ## API
 
-See [API.md](/api.md) for information.
+See [API.md](/API.md) for information.
 
 ## Authors
 
