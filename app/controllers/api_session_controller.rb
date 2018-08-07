@@ -123,8 +123,13 @@ class ApiSessionController < AnnotatorsController
             # Otherwise create a new user from the 
             else
                 # Make a new user and point the annotation to that.
-                p = Digest::SHA1.hexdigest "default"                
-                user = User.new(:name => params[:creator][:email], :email => params[:creator][:email], :password => p, :password_confirmation => p)
+                p = Digest::SHA1.hexdigest "default"    
+                if params[:creator][:nickname].nil?
+                    nick = params[:creator][:email];
+                else 
+                    nick = params[:creator][:nickname];
+                end      
+                user = User.new(:name => nick, :email => params[:creator][:email], :password => p, :password_confirmation => p)
                 user.save
                 @annotation.user_id = user.id
             end
@@ -261,7 +266,12 @@ class ApiSessionController < AnnotatorsController
             else
                 # Make a new user and point the annotation to that.
                 p = Digest::SHA1.hexdigest "default"                
-                user = User.new(:name => params[:creator][:email], :email => params[:creator][:email], :password => p, :password_confirmation => p)
+                if params[:creator][:nickname].nil?
+                    nick = params[:creator][:email];
+                else 
+                    nick = params[:creator][:nickname];
+                end      
+                user = User.new(:name => nick, :email => params[:creator][:email], :password => p, :password_confirmation => p)
                 user.save
                 flag_user_id = user.id
             end
